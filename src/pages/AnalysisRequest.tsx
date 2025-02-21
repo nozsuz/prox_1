@@ -127,7 +127,7 @@ export default function AnalysisRequest() {
       if (!expertise) throw new Error('専門分野が見つかりません');
 
       const completion = await openai.chat.completions.create({
-        model: "gpt-4-0125-preview",
+        model: "chatgpt-4o-latest",
         messages: [
           {
             role: "system",
