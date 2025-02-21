@@ -1,35 +1,34 @@
 import React from 'react';
 import { 
-  ArrowRight, Send, Users, FileCheck, Clock, Sparkles, CheckCircle, Zap,
+  ArrowRight, Send, Users, FileCheck, Sparkles, CheckCircle, Zap,
   Brain, Shield, Star, Award
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const steps = [
   {
-    icon: <Send className="w-8 h-8" />,
+    icon: <Send className="w-8 h-8" />, 
     title: '分析依頼の送信',
-    description: 'ChatGPTの回答を送信し、専門分野を選択。',
+    description: 'ChatGPTの回答を送信し、専門分野と追加要望を選択。',
     details: [
-      '専門分野の選択',
-      'ChatGPTの回答の貼り付け',
-      '追加の要望や質問の記入'
+      '専門分野の選択と要望の記入',
+      'ChatGPTの回答の貼り付け'
     ]
   },
   {
-    icon: <Brain className="w-8 h-8" />,
+    icon: <Brain className="w-8 h-8" />, 
     title: 'AIによる事前分析',
-    description: 'AIが回答の下書きを作成し、専門家の分析をサポート。',
+    description: 'AIが回答の妥当性をスコアリングし、専門家の分析をサポート。',
     details: [
       '回答内容の自動チェック',
-      '参考文献の自動収集',
+      '妥当性スコアリングと信頼性評価',
       '専門家への分析ポイント提示'
     ]
   },
   {
-    icon: <Users className="w-8 h-8" />,
-    title: '厳選された専門家による分析',
-    description: '実績と評価に基づいて選定された専門家が詳細に分析。',
+    icon: <Users className="w-8 h-8" />, 
+    title: '専門家による詳細分析',
+    description: '厳選された専門家がAIの分析結果を検証し、最適な解決策を提案。',
     details: [
       'AIの分析結果の検証',
       '実務経験に基づく改善提案',
@@ -37,44 +36,20 @@ const steps = [
     ]
   },
   {
-    icon: <FileCheck className="w-8 h-8" />,
-    title: 'AIと専門家のハイブリッド分析結果',
-    description: 'AIと専門家の知見を組み合わせた包括的な分析結果を提供。',
+    icon: <FileCheck className="w-8 h-8" />, 
+    title: '包括的な分析結果の提供',
+    description: 'AIと専門家の知見を統合し、実践的なアクションプランを提案。',
     details: [
-      'AIと専門家の分析比較',
-      '改善点の具体的な説明',
-      '実践的なアクションプラン'
+      'AIと専門家の分析結果の統合',
+      '具体的な改善点の説明',
+      '実践的なアクションプランの提供'
     ]
-  }
-];
-
-const benefits = [
-  {
-    icon: <Shield className="w-6 h-6" />,
-    title: '厳格な専門家選定',
-    description: 'LinkedInやResearchGateと連携し、実績のある専門家のみを認定'
-  },
-  {
-    icon: <Star className="w-6 h-6" />,
-    title: '継続的な品質管理',
-    description: 'AIによる品質チェックと専門家の評価システムで高品質を維持'
-  },
-  {
-    icon: <Award className="w-6 h-6" />,
-    title: '専門家の評価制度',
-    description: 'ユーザー評価とAI分析による独自のスコアリングシステム'
-  },
-  {
-    icon: <Brain className="w-6 h-6" />,
-    title: 'AIとの最適な融合',
-    description: 'AIの効率性と専門家の経験を組み合わせた革新的な分析'
   }
 ];
 
 export default function ServiceFlow() {
   return (
     <div className="max-w-4xl mx-auto">
-      {/* サービスの流れ */}
       <section className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
         <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
           <h2 className="text-xl font-semibold text-white">サービスの流れ</h2>
@@ -111,27 +86,6 @@ export default function ServiceFlow() {
         </div>
       </section>
 
-      {/* サービスのメリット */}
-      <section className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
-        <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
-          <h2 className="text-xl font-semibold text-white">サービスのメリット</h2>
-        </div>
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="text-indigo-600">{benefit.icon}</div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTAセクション */}
       <section className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-lg overflow-hidden text-white">
         <div className="p-8">
           <div className="text-center mb-8">

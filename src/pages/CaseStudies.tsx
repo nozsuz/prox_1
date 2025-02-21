@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Star, ThumbsUp, Clock, ArrowRight, MessageSquare, Lightbulb, CheckCircle } from 'lucide-react';
+import { Sparkles, Star, ThumbsUp, CheckCircle } from 'lucide-react';
 
 const useCases = [
   {
@@ -10,14 +10,16 @@ const useCases = [
     benefits: [
       '専門家による実務的な観点からの分析',
       'コストとパフォーマンスのバランス評価',
-      '具体的な実装手順の提案'
+      'ハイパーパラメータ調整やアルゴリズム選定のアドバイス'
     ],
     expert: {
       role: 'AI研究者・機械学習エンジニア',
       expertise: [
         'モデル最適化',
         'パフォーマンスチューニング',
-        'コスト効率化'
+        'コスト効率化',
+        'ハイパーパラメータ調整',
+        'アルゴリズム選定アドバイス'
       ]
     }
   },
@@ -28,15 +30,17 @@ const useCases = [
     situation: 'ChatGPTが提案した新規事業戦略の実現可能性を検証したい',
     benefits: [
       '市場動向と競合分析',
-      'リスク評価と対策提案',
-      '段階的な実施計画の策定'
+      '市場リスク評価・資金リスク評価',
+      '段階的な実施計画の策定',
+      '事業戦略のピボット提案'
     ],
     expert: {
       role: '経営戦略コンサルタント',
       expertise: [
         '事業戦略立案',
         'マーケット分析',
-        'リスクマネジメント'
+        '市場リスク評価・資金リスク評価',
+        '事業戦略のピボット提案'
       ]
     }
   },
@@ -48,14 +52,16 @@ const useCases = [
     benefits: [
       '統計的手法の妥当性評価',
       '研究トレンドとの整合性確認',
-      '追加分析の提案'
+      '追加分析の提案',
+      'データの前処理・欠損値処理アドバイス'
     ],
     expert: {
       role: '研究者・データサイエンティスト',
       expertise: [
         'データ解析',
         '統計分析',
-        '研究方法論'
+        '統計モデリング・機械学習解析',
+        'データの前処理・欠損値処理アドバイス'
       ]
     }
   }

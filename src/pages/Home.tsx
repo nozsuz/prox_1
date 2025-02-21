@@ -158,10 +158,12 @@ export default function Home() {
             <div className="group bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl transition-all duration-300 hover:bg-white/15">
               <div className="transform group-hover:-translate-y-1 transition-transform duration-300">
                 <h3 className="text-xl md:text-2xl font-semibold text-white mb-2 md:mb-3">
-                  専門家による
+                  迅速な分析
                 </h3>
                 <p className="text-base md:text-lg text-gray-200">
-                  迅速な分析
+                  スピーディーに課題を特定
+                  <br className="hidden sm:block" />
+                  最適な解決策を提示 
                 </p>
               </div>
             </div>

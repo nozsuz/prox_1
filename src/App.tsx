@@ -17,6 +17,7 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Enterprise from './pages/Enterprise';
 import Pricing from './pages/Pricing';
+import Organizations from './pages/Organizations';
 import ProtectedRoute from './components/ProtectedRoute';
 import { supabase } from './lib/supabase';
 
@@ -55,7 +56,7 @@ function Navbar() {
     { path: '/service-flow', text: 'サービスの流れ' },
     { path: '/pricing', text: '料金プラン' },
     { path: '/case-studies', text: '利用シーン' },
-    { path: '/company', text: '会社概要' },
+    { path: '/organizations', text: '専門家一覧' },
   ];
 
   return (
@@ -385,6 +386,7 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/enterprise" element={<Enterprise />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/organizations" element={<Organizations />} />
         </Routes>
       </Layout>
     </Router>
