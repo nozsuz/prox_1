@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageSquare, Send, Code, Microscope, Briefcase, Palette, Brain, Target, ArrowRight, AlertTriangle, CheckCircle } from 'lucide-react';
+import { 
+  MessageSquare, Send, Code, Microscope, Briefcase, Palette, Brain, Target, 
+  AlertTriangle, CheckCircle 
+} from 'lucide-react';
 import OpenAI from 'openai';
 import { TutorialQuestion } from '../components/Onboarding';
 import { supabase } from '../lib/supabase';
@@ -17,15 +20,15 @@ const expertiseAreas = [
     icon: <Code className="w-6 h-6" />,
     description: 'ソフトウェア開発、IT、デジタルソリューション',
     systemPrompt: `あなたは技術分野の専門AIアシスタントです。
-    以下の観点からChatGPTの回答を分析してください：
-    - コードの品質と最新のベストプラクティスとの整合性
-    - スケーラビリティとパフォーマンスへの影響
-    - セキュリティリスクと対策
-    - 実装の複雑さと保守性
-    - クラウドやインフラストラクチャへの影響
-    
-    また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
-    得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
+以下の観点からChatGPTの回答を分析してください：
+- コードの品質と最新のベストプラクティスとの整合性
+- スケーラビリティとパフォーマンスへの影響
+- セキュリティリスクと対策
+- 実装の複雑さと保守性
+- クラウドやインフラストラクチャへの影響
+
+また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
+得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
   },
   {
     id: 'science',
@@ -33,15 +36,15 @@ const expertiseAreas = [
     icon: <Microscope className="w-6 h-6" />,
     description: '研究、実験、科学的発見',
     systemPrompt: `あなたは科学研究分野の専門AIアシスタントです。
-    以下の観点からChatGPTの回答を分析してください：
-    - 科学的手法の妥当性
-    - 実験デザインの適切性
-    - データ分析手法の正確性
-    - 研究倫理への配慮
-    - 再現性と検証可能性
-    
-    また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
-    得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
+以下の観点からChatGPTの回答を分析してください：
+- 科学的手法の妥当性
+- 実験デザインの適切性
+- データ分析手法の正確性
+- 研究倫理への配慮
+- 再現性と検証可能性
+
+また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
+得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
   },
   {
     id: 'business',
@@ -49,15 +52,15 @@ const expertiseAreas = [
     icon: <Briefcase className="w-6 h-6" />,
     description: '経営、戦略、起業',
     systemPrompt: `あなたはビジネス戦略の専門AIアシスタントです。
-    以下の観点からChatGPTの回答を分析してください：
-    - 市場動向との整合性
-    - 実現可能性とリソース要件
-    - ROIと投資対効果
-    - リスク分析と対策
-    - 競合優位性への影響
-    
-    また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
-    得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
+以下の観点からChatGPTの回答を分析してください：
+- 市場動向との整合性
+- 実現可能性とリソース要件
+- ROIと投資対効果
+- リスク分析と対策
+- 競合優位性への影響
+
+また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
+得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
   },
   {
     id: 'arts',
@@ -65,17 +68,35 @@ const expertiseAreas = [
     icon: <Palette className="w-6 h-6" />,
     description: 'クリエイティブアート、デザイン、文化研究',
     systemPrompt: `あなたはクリエイティブ分野の専門AIアシスタントです。
-    以下の観点からChatGPTの回答を分析してください：
-    - デザイン原則との整合性
-    - ユーザー体験への影響
-    - 文化的・社会的な影響
-    - 創造性と革新性
-    - 実現可能性と技術的制約
-    
-    また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
-    得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
+以下の観点からChatGPTの回答を分析してください：
+- デザイン原則との整合性
+- ユーザー体験への影響
+- 文化的・社会的な影響
+- 創造性と革新性
+- 実現可能性と技術的制約
+
+また、ユーザーが指摘した懸念点や要望に特に注目し、それらの点について詳しく分析してください。
+得たいアウトプットとして指定された内容についても、実現可能性と改善案を検討してください。`
   }
 ];
+
+/**
+ * GPTの回答テキスト中に含まれるマーカーに基づき、特定の部分にスタイルを適用する関数
+ * 例: [正] → 緑色、[要] → 赤色
+ */
+const renderHighlightedText = (text) => {
+  // 正規表現でマーカーで分割します
+  const segments = text.split(/(\[正\]|\[要\])/);
+  return segments.map((segment, index) => {
+    if (segment === '[正]') {
+      return <span key={index} style={{ color: 'green', fontWeight: 'bold' }}>[正]</span>;
+    } else if (segment === '[要]') {
+      return <span key={index} style={{ color: 'red', fontWeight: 'bold' }}>[要]</span>;
+    } else {
+      return <span key={index}>{segment}</span>;
+    }
+  });
+};
 
 export default function AnalysisRequest() {
   const navigate = useNavigate();
@@ -86,17 +107,10 @@ export default function AnalysisRequest() {
   const [concerns, setConcerns] = useState('');
   const [desiredOutput, setDesiredOutput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [aiAnalysis, setAiAnalysis] = useState<{
-    summary: string;
-    satisfiedPoints: string[];
-    concernPoints: string[];
-    expertQuestions: string[];
-    suggestedApproach: string;
-    confidence: number;
-  } | null>(null);
+  const [aiAnalysis, setAiAnalysis] = useState(null);
 
   useEffect(() => {
-    // Check authentication status
+    // 認証状態のチェック
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
@@ -112,7 +126,7 @@ export default function AnalysisRequest() {
     }
   }, [navigate]);
 
-  const handleAIAnalysis = async (e: React.FormEvent) => {
+  const handleAIAnalysis = async (e) => {
     e.preventDefault();
     if (!chatGPTResponse || !selectedExpertise) return;
 
@@ -136,11 +150,11 @@ export default function AnalysisRequest() {
 以下の形式で分析結果を返してください。必ず有効なJSONとして解析できる形式を守ってください：
 
 {
-  "summary": "全体的な分析の要約（200文字程度）",
+  "summary": "全体的な分析の要約（200文字程度、必要に応じて[正]と[要]のマーカーを挿入）",
   "satisfiedPoints": ["ChatGPTの回答で十分に満たされている点を3-4個"],
   "concernPoints": ["さらなる検討や専門家の意見が必要な点を3-4個"],
   "expertQuestions": ["専門家に確認すべき具体的な質問を3-4個"],
-  "suggestedApproach": "専門家への相談アプローチの提案（200文字程度）",
+  "suggestedApproach": "専門家への相談アプローチの提案（200文字程度、必要に応じて[正]と[要]のマーカーを挿入）",
   "confidence": 85
 }`
           },
@@ -171,12 +185,13 @@ ${desiredOutput}`
     }
   };
 
-  const handleExpertRequest = async (e: React.FormEvent) => {
+  const handleExpertRequest = async (e) => {
     e.preventDefault();
     if (!selectedExpertise || !chatGPTResponse || !aiAnalysis) return;
 
     setIsLoading(true);
     try {
+      // 専門家への依頼処理（ここでは擬似的な処理）
       await new Promise(resolve => setTimeout(resolve, 1500));
       alert('専門家への分析依頼が完了しました。マイページで進捗を確認できます。');
       setSelectedExpertise('');
@@ -222,18 +237,14 @@ ${desiredOutput}`
           <div className="px-6 pt-6">
             <div className="flex items-center">
               <div className="flex-1">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  step >= 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'
-                }`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                   1
                 </div>
                 <p className="text-sm mt-2">AI分析</p>
               </div>
               <div className="flex-1 border-t-2 border-gray-200" />
               <div className="flex-1 text-right">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ml-auto ${
-                  step >= 2 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'
-                }`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ml-auto ${step >= 2 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                   2
                 </div>
                 <p className="text-sm mt-2">専門家に依頼</p>
@@ -261,14 +272,10 @@ ${desiredOutput}`
                         }`}
                       >
                         <div className="flex flex-col items-center text-center">
-                          <div className={`mb-3 ${
-                            selectedExpertise === area.id ? 'text-indigo-600' : 'text-gray-600'
-                          }`}>
+                          <div className={`mb-3 ${selectedExpertise === area.id ? 'text-indigo-600' : 'text-gray-600'}`}>
                             {area.icon}
                           </div>
-                          <div className={`font-medium ${
-                            selectedExpertise === area.id ? 'text-indigo-600' : 'text-gray-800'
-                          }`}>
+                          <div className={`font-medium ${selectedExpertise === area.id ? 'text-indigo-600' : 'text-gray-800'}`}>
                             {area.name}
                           </div>
                           <div className="text-sm text-gray-500 mt-2">{area.description}</div>
@@ -358,7 +365,9 @@ ${desiredOutput}`
                   <div className="space-y-6">
                     <div>
                       <h4 className="font-medium text-gray-700 mb-2">分析概要</h4>
-                      <p className="text-gray-600">{aiAnalysis?.summary}</p>
+                      <p className="text-gray-600">
+                        {aiAnalysis?.summary ? renderHighlightedText(aiAnalysis.summary) : ''}
+                      </p>
                     </div>
 
                     <div>
@@ -399,7 +408,9 @@ ${desiredOutput}`
 
                     <div>
                       <h4 className="font-medium text-gray-700 mb-2">専門家への相談アプローチ</h4>
-                      <p className="text-gray-600">{aiAnalysis?.suggestedApproach}</p>
+                      <p className="text-gray-600">
+                        {aiAnalysis?.suggestedApproach ? renderHighlightedText(aiAnalysis.suggestedApproach) : ''}
+                      </p>
                     </div>
 
                     <div className="flex items-center gap-2 pt-4 border-t">
