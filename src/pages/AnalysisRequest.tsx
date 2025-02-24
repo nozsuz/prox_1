@@ -80,24 +80,6 @@ const expertiseAreas = [
   }
 ];
 
-/**
- * GPTの回答テキスト中に含まれるマーカーに基づき、特定の部分にスタイルを適用する関数
- * 例: [正] → 緑色、[要] → 赤色
- */
-const renderHighlightedText = (text) => {
-  // 正規表現でマーカーで分割します
-  const segments = text.split(/(\[正\]|\[要\])/);
-  return segments.map((segment, index) => {
-    if (segment === '[正]') {
-      return <span key={index} style={{ color: 'green', fontWeight: 'bold' }}>[正]</span>;
-    } else if (segment === '[要]') {
-      return <span key={index} style={{ color: 'red', fontWeight: 'bold' }}>[要]</span>;
-    } else {
-      return <span key={index}>{segment}</span>;
-    }
-  });
-};
-
 export default function AnalysisRequest() {
   const navigate = useNavigate();
   const [showTutorial, setShowTutorial] = useState(false);
@@ -150,11 +132,11 @@ export default function AnalysisRequest() {
 以下の形式で分析結果を返してください。必ず有効なJSONとして解析できる形式を守ってください：
 
 {
-  "summary": "全体的な分析の要約（200文字程度、必要に応じて[正]と[要]のマーカーを挿入）",
+  "summary": "全体的な分析の要約（200文字程度）",
   "satisfiedPoints": ["ChatGPTの回答で十分に満たされている点を3-4個"],
   "concernPoints": ["さらなる検討や専門家の意見が必要な点を3-4個"],
   "expertQuestions": ["専門家に確認すべき具体的な質問を3-4個"],
-  "suggestedApproach": "専門家への相談アプローチの提案（200文字程度、必要に応じて[正]と[要]のマーカーを挿入）",
+  "suggestedApproach": "専門家への相談アプローチの提案（200文字程度）",
   "confidence": 85
 }`
           },
@@ -356,6 +338,12 @@ ${desiredOutput}`
               </form>
             ) : (
               <div className="space-y-6">
+                {/* GPTの回答内容を表示 */}
+                <div className="bg-gray-100 rounded-xl p-6">
+                  <h4 className="font-medium text-gray-700 mb-2">入力されたChatGPTの回答</h4>
+                  <pre className="text-gray-600 whitespace-pre-wrap">{chatGPTResponse}</pre>
+                </div>
+
                 <div className="bg-gray-50 rounded-xl p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <Brain className="w-6 h-6 text-indigo-600" />
@@ -365,9 +353,7 @@ ${desiredOutput}`
                   <div className="space-y-6">
                     <div>
                       <h4 className="font-medium text-gray-700 mb-2">分析概要</h4>
-                      <p className="text-gray-600">
-                        {aiAnalysis?.summary ? renderHighlightedText(aiAnalysis.summary) : ''}
-                      </p>
+                      <p className="text-gray-600">{aiAnalysis?.summary}</p>
                     </div>
 
                     <div>
@@ -408,9 +394,7 @@ ${desiredOutput}`
 
                     <div>
                       <h4 className="font-medium text-gray-700 mb-2">専門家への相談アプローチ</h4>
-                      <p className="text-gray-600">
-                        {aiAnalysis?.suggestedApproach ? renderHighlightedText(aiAnalysis.suggestedApproach) : ''}
-                      </p>
+                      <p className="text-gray-600">{aiAnalysis?.suggestedApproach}</p>
                     </div>
 
                     <div className="flex items-center gap-2 pt-4 border-t">
